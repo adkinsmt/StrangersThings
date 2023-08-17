@@ -1,17 +1,20 @@
 import Login from "./components/Login"
-import Register from "./components/Register"
+import { useEffect, useState } from "react"
+
 
 export default function App() {
-  const [initialForm, setInitialForm] = useState ("login")
+  const [token, setToken] = useState (null)
 
-  const toggleForm = (formName) => {
-    setInitialForm(formName)
-  }
+  useEffect(() => {
+    const generatedToken = localStorage.getItem("token")
+    generatedToken ? setToken : null
+  }, [])
 
   return(
     <>
       {
-        initialForm === "login"? <Login onFormSwitch = {toggleForm}/> : <Register />
+        !token? <Login setToken = {setToken}/>: 
+        <h1>Welcome to Stanger's Things!</h1>
       }
     </>
   )

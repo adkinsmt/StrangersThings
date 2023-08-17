@@ -4,7 +4,7 @@ const COHORT_NAME = "2305-FTB-MT-WEB-PT";
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
 
-export default function Login(props) {
+export default function Login({setToken}) {
     const [username, setUsername] = useState ("")
     const [password, setPassword] = useState ("")
 
@@ -25,13 +25,14 @@ export default function Login(props) {
                 })
             })
             const result = await response.json()
+            console.log(result)
+            localStorage.setItem("token", result.data.token)
+            setToken(result.data.token)
             return result
         } catch(error) {
             console.log(error)
         }
     }
-
-    
 
     return(
     <div>
@@ -54,9 +55,7 @@ export default function Login(props) {
                 type = "submit"
                 >Log in</button>
         </form>
-        <button
-             onClick = {props.onFormSwitch}
-        >Don't have an account? Register here.</button>
+        <button>Don't have an account? Register here.</button>
     </div>
     )
 }
