@@ -3,12 +3,12 @@ import React from 'react';
 const Logout = () => {
   const handleLogout = () => {
     localStorage.removeItem('accessToken'); 
-    window.location.reload();
+    React-router();
   };
 
   return (
     <button onClick={handleLogout}>Logout</button>
   );
 };
-
+console.log('logout');
 export default Logout;
